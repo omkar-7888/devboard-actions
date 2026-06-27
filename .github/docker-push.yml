@@ -1,11 +1,10 @@
 #Goal Build the image for devboard frontend and push it to DockerHub
 
-name: Docker Push
+name: Docker Pipeline
 
 on:
   push:
     branches: [feature/ci-pipeline]
-
 jobs:
   docker-push:
     runs-on: ubuntu-latest
