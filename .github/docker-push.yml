@@ -16,7 +16,7 @@ jobs:
       - name: Docker Setup [Login]
         uses: docker/login-actions@v3
         with:
-          username:${{ }}
-          password:${{ }}
+          username:${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN}}
 
       
