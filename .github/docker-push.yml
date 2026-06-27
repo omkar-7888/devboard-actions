@@ -1,0 +1,22 @@
+#Goal Build the image for devboard frontend and push it to DockerHub
+
+name: Docker Push
+
+on:
+  push:
+    branches: [feature/ci-pipeline]
+
+jobs:
+  docker-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v7
+
+      - name: Docker Setup [Login]
+        uses: docker/login-actions@v3
+        with:
+          username:${{ }}
+          password:${{ }}
+
+      
