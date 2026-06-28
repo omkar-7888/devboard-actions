@@ -3,11 +3,12 @@
 name: CD Pipeline
 
 on:
-  workflow_run:
-    workflows: ['CI Pipeline']
-    types: [completed]
-    branches:
-      - feature/ci-pipeline
+  workflow_call:
+  # workflow_run:
+  #   workflows: ['CI Pipeline']
+  #   types: [completed]
+  #   branches:
+  #     - feature/ci-pipeline
 
 jobs:
   deploy:
