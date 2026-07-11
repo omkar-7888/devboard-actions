@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres
+  namespace: devboard
+spec:
+  selector:
+    app: devboard-postgres
+  ports:
+    - protocol: TCP
+      port: 5432 #service
+      targetPort: 5432 #container pod ka port hota he ye Always
+  
+
+
+
