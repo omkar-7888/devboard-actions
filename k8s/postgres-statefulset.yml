@@ -1,12 +1,13 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: postgres-deployment
+  name: postgres-statefulset
   namespace: devboard
   labels:
     app: devboard-postgres
 spec:
-  replicas: 1               # NOTE: Database ke liye 1 replica hi rakhein taaki data crash na ho
+  serviceName: "postgres" 
+  replicas: 1              
   selector:
     matchLabels:
       app: devboard-postgres
@@ -19,7 +20,7 @@ spec:
       - name: postgres
         image: postgres:16-alpine
         ports:
-        - containerPort: 5432   # Perfect 2-space internal list format
+        - containerPort: 5432   
 
         env:
         - name: POSTGRES_USER
@@ -57,7 +58,14 @@ spec:
           configMap:
             name: postgres-init
 
-        - name: data
-          persistentVolumeClaim:
-            claimName: postgres-pvc
-
+  # MOVED: Now correctly placed inside the main spec block
+  volumeClaimTemplates:
+    - metadata:
+        name: data # MATCHED: Must match the volumeMounts name above
+      spec:
+        storageClassName: manual
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi

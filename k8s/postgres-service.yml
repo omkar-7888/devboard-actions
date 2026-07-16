@@ -4,6 +4,7 @@ metadata:
   name: postgres
   namespace: devboard
 spec:
+  clusterIP: None #now service is headless
   selector:
     app: devboard-postgres
   ports:

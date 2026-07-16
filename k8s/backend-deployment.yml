@@ -46,4 +46,11 @@ spec:
               configMapKeyRef:
                 name: devboard-configmap
                 key: BACKEND_PORT
+        
+        livenessProbe: 
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 10
 
